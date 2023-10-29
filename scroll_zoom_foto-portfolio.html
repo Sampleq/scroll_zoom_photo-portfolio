@@ -4,22 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scroll zoom foto portfolio</title>
+    <title>Scroll zoom photo portfolio</title>
     <style>
         html {
             font-size: 10px;
         }
 
         * {
-            /* margin: 0; */
+            margin: 0;
             padding: 0;
             font-size: 2rem;
             box-sizing: border-box;
         }
 
+
+        h1 {
+            font-size: 5rem;
+            margin: 3rem auto;
+            width: fit-content;
+        }
+
+        h2 {
+            font-size: 4rem;
+            margin: 2rem 0;
+        }
+
         header {
             background-color: beige;
-            height: 45rem;
+            min-height: 45rem;
+            padding: 5rem;
         }
 
         .wrapper {
@@ -59,7 +72,7 @@
             transform: translate(0, 20rem);
         }
 
-        .card__foto-cont {
+        .card__photo-cont {
             /* width: 0.055rem;
             height: 0.055rem; */
             width: 50rem;
@@ -79,28 +92,55 @@
 
         }
 
-        .card__foto-cont_big {
+        .card__photo-cont_big {
             /* width: 50rem;
             height: 50rem; */
             transform: translate(-0%, calc(-20rem - 80%)) scale(1);
             border-width: 0.5rem;
         }
 
-        .card__foto {
+        .card__photo {
             width: 100%;
             /* vertical-align: top; */
             display: block;
+        }
+
+        #message {
+            position: fixed;
+            background-color: #f1c40f7b;
+            padding: 10px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-sizing: border-box;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
     <div class="top" style="height: 10rem;"></div>
-    <header id="header"></header>
+    <header id="header">
+        <div class="wrapper">
+            <section>
+                <h1>Main title</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt culpa laboriosam qui quas,
+                    veritatisquam quo provident facilis minima dolor maiores? Voluptatem eligendi optio veniam quis
+                    velit.
+
+
+                </p>
+            </section>
+        </div>
+    </header>
     <div class="wrapper">
         <section>
             <h2>Title</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae officiis illum ex eos voluptatum facilis
+            <p id="p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae officiis illum ex eos voluptatum
+                facilis
                 sed
                 natus! Rem sunt quia officiis voluptate esse inventore nam dolore blanditiis. Quisquam id animi fugiat,
                 deserunt laboriosam alias aperiam architecto aliquid vel esse? Quae amet, explicabo quos expedita
@@ -115,8 +155,13 @@
                 rem,
                 dignissimos ullam aliquam saepe sequi?
             </p>
+
+            <div id="message"></div>
+            <!-- <div id="target-container">Target</div> -->
+
             <h2>Title</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae officiis illum ex eos voluptatum facilis
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae officiis illum ex eos voluptatum
+                facilis
                 sed
                 natus! Rem sunt quia officiis voluptate esse inventore nam dolore blanditiis. Quisquam id animi fugiat,
                 deserunt laboriosam alias aperiam architecto aliquid vel esse? Quae amet, explicabo quos expedita
@@ -166,8 +211,8 @@
 
         </section>
         <div class="card card_trtop">
-            <div class="card__foto-cont card__foto-cont_big">
-                <img src="./woman.jpg" alt="" class="card__foto">
+            <div class="card__photo-cont card__photo-cont_big">
+                <img src="./woman.jpg" alt="" class="card__photo">
             </div>
 
         </div>
@@ -175,32 +220,53 @@
 
     <script>
         const card = document.querySelector('.card');
-        const foto = document.querySelector('.card__foto-cont');
+        const photo = document.querySelector('.card__photo-cont');
+        const header = document.getElementById('header');
+        const message = document.querySelector("#message");
+        // const p = document.getElementById('p');
 
 
-        document.onscroll = () => {
-            if (window.scrollY > 170) {
-                card.classList.remove('card_trtop');
-                foto.classList.remove('card__foto-cont_big');
-            } else {
-                card.classList.add('card_trtop');
-                foto.classList.add('card__foto-cont_big');
-            }
-        }
+        // document.onscroll = () => {
+        //     if (window.scrollY > 170) {
+        //         card.classList.remove('card_trtop');
+        //         photo.classList.remove('card__photo-cont_big');
+        //     } else {
+        //         card.classList.add('card_trtop');
+        //         photo.classList.add('card__photo-cont_big');
+        //     }
+        // }
 
 
         // const observer = new IntersectionObserver((entries) => {
         //     entries.forEach((entry) => {
-        //         if (entry['intersectionRatio'] < 0.75) {
-        //             // document.body.style.background = 'red';
-        //             card.classList.toggle('card_trtop');
-        //             foto.classList.toggle('card__foto-cont_big');
-        //         }
-        //     });
+        // }
+        //     );
         // });
 
-        // observer.observe(header);
 
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0]['isIntersecting'] === true) {
+                if (entries[0]['intersectionRatio'] > 0.85) {
+                    message.textContent = 'More than 85% of target is visible in screen';
+
+                    card.classList.add('card_trtop');
+                    photo.classList.add('card__photo-cont_big');
+                }
+                else {
+                    message.textContent = 'Less than 85% of target is visible in screen';
+                    card.classList.remove('card_trtop');
+                    photo.classList.remove('card__photo-cont_big');
+                }
+            }
+            else {
+                message.textContent = 'Target is not visible in screen';
+                // in case user scrolls way to fast
+                card.classList.remove('card_trtop');
+                photo.classList.remove('card__photo-cont_big');
+            }
+        }, { threshold: [0, 0.85] });
+
+        observer.observe(header);
 
     </script>
 </body>
