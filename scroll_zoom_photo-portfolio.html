@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll zoom photo portfolio</title>
+    <style>
+        html {
+            font-size: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 2rem;
+            box-sizing: border-box;
+        }
+
+
+        h1 {
+            font-size: 5rem;
+            margin: 3rem auto;
+            width: fit-content;
+        }
+
+        h2 {
+            font-size: 4rem;
+            margin: 2rem 0;
+        }
+
+        .top {
+            /* background: url(./raindrops-turquoise-background.jpg); */
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        header {
+            background-color: rgb(243, 191, 191);
+            min-height: 45rem;
+            padding: 5rem 0;
+        }
+
+        .wrapper {
+            /* outline: 1px solid #ccc; */
+            max-width: 110rem;
+            margin: 0 auto;
+            padding: 4rem 2rem 2rem;
+            /* display: flex;
+            justify-content: space-between;
+            gap: 3rem; */
+
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 5rem;
+        }
+
+        main {
+            background-image: linear-gradient(rgba(230, 230, 255, 0.82), rgba(233, 254, 238, 0.878));
+            background-size: cover;
+            /* background-attachment: fixed; */
+        }
+
+        .card {
+            background-color: bisque;
+            width: 100%;
+            height: 50rem;
+            max-width: 40rem;
+            border-radius: 2rem;
+            margin: 0 auto;
+            margin-top: 10rem;
+            /* flex-shrink: 0; */
+            /* position: relative; */
+            position: relative;
+            transition: all 0.5s linear;
+
+            order: -2;
+        }
+
+        .card_trtop {
+            transform: translate(0, 20rem);
+        }
+
+        .card__photo-cont {
+            /* width: 0.055rem;
+            height: 0.055rem; */
+            width: 50rem;
+            height: 50rem;
+            border: calc(0.5rem / 0.3) solid #fff;
+            vertical-align: top;
+            box-shadow: 0 0 5rem rgba(253, 228, 87, 0.751);
+            border-radius: 50%;
+            overflow: hidden;
+
+            position: absolute;
+            right: 0;
+            top: 0;
+            /* transform: translate(-5%, -50%) scale(1000); */
+            transform: translate(30%, -50%) scale(0.3);
+            transition: all 0.5s linear;
+        }
+
+        .card__photo-cont_big {
+            /* width: 50rem;
+            height: 50rem; */
+            transform: translate(22%, calc(-20rem - 80%)) scale(0.6);
+            border-width: 0.5rem;
+        }
+
+        .card__photo {
+            width: 100%;
+            /* vertical-align: top; */
+            display: block;
+        }
+
+        #message {
+            position: fixed;
+            background-color: #f1c40f7b;
+            padding: 10px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-sizing: border-box;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        @media(min-width:768px) {
+            .wrapper {
+                grid-template-columns: 1fr 30rem;
+            }
+
+            .card {
+                position: sticky;
+                order: 2;
+            }
+
+            .card__photo-cont_big {
+                transform: translate(8%, calc(-20rem - 82%)) scale(0.8);
+            }
+        }
+
+        @media(min-width:1024px) {
+            .wrapper {
+                grid-template-columns: 1fr 35rem;
+            }
+
+            .card__photo-cont_big {
+                transform: translate(5%, calc(-20rem - 82%)) scale(0.9);
+            }
+        }
+
+        @media(min-width:1130px) {
+            .wrapper {
+                padding: 4rem 0 2rem;
+                grid-template-columns: 1fr 40rem;
+                gap: 10rem;
+            }
+
+            .card__photo-cont_big {
+                transform: translate(0%, calc(-20rem - 80%)) scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top" style="height: 10rem;"></div>
+    <header id="header">
+        <div class="wrapper">
+            <section>
+                <h1>Main title</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eligendi optio veniam quis
+                    velit.
+
+
+                </p>
+            </section>
+        </div>
+    </header>
+    <main>
+        <div class="wrapper wrapper_main">
+            <section>
+                <h2>Title</h2>
+                <p id="p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae officiis illum ex eos
+                    voluptatum
+                    facilis
+                    sed
+                    natus! Rem sunt quia officiis voluptate esse inventore nam dolore blanditiis. Quisquam id animi
+                    fugiat,
+                    deserunt laboriosam alias aperiam architecto aliquid vel esse? Quae amet, explicabo quos expedita
+                    laborum
+                    fuga molestiae. Nostrum maxime dolore autem, corrupti beatae vel cum omnis voluptates qui. Quos
+                    sequi
+                    tenetur at quaerat modi dolore, consequuntur deserunt est voluptates quasi facilis accusantium
+                    repellat
+                    similique ipsum ratione incidunt beatae. Ratione odio nostrum facere, maiores dolorem esse possimus
+                    omnis
+                    maxime, corporis veritatis quos corrupti animi nihil, ex quibusdam suscipit nisi quasi soluta. Rerum
+                    ducimus
+                    repellendus quidem reiciendis dolore amet, eligendi doloribus perferendis, praesentium quaerat vitae
+                    rem,
+                    dignissimos ullam aliquam saepe sequi?
+                </p>
+
+                <div id="message"></div>
+                <!-- <div id="target-container">Target</div> -->
+
+                <h2>Title</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae officiis illum ex eos voluptatum
+                    facilis
+                    sed
+                    natus! Rem sunt quia officiis voluptate esse inventore nam dolore blanditiis. Quisquam id animi
+                    fugiat,
+                    deserunt laboriosam alias aperiam architecto aliquid vel esse? Quae amet, explicabo quos expedita
+                    laborum
+                    fuga molestiae. Nostrum maxime dolore autem, corrupti beatae vel cum omnis voluptates qui. Quos
+                    sequi
+                    tenetur at quaerat modi dolore, consequuntur deserunt est voluptates quasi facilis accusantium
+                    repellat
+                    similique ipsum ratione incidunt beatae. Ratione odio nostrum facere, maiores dolorem esse possimus
+                    omnis
+                    maxime, corporis veritatis quos corrupti animi nihil, ex quibusdam suscipit nisi quasi soluta. Rerum
+                    ducimus
+                    repellendus quidem reiciendis dolore amet, eligendi doloribus perferendis, praesentium quaerat vitae
+                    rem,
+                    dignissimos ullam aliquam saepe sequi?
+                </p>
+                <h2>Title</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae officiis illum ex eos voluptatum
+                    facilis
+                    sed
+                    natus! Rem sunt quia officiis voluptate esse inventore nam dolore blanditiis. Quisquam id animi
+                    fugiat,
+                    deserunt laboriosam alias aperiam architecto aliquid vel esse? Quae amet, explicabo quos expedita
+                    laborum
+                    fuga molestiae. Nostrum maxime dolore autem, corrupti beatae vel cum omnis voluptates qui. Quos
+                    sequi
+                    tenetur at quaerat modi dolore, consequuntur deserunt est voluptates quasi facilis accusantium
+                    repellat
+                    similique ipsum ratione incidunt beatae. Ratione odio nostrum facere, maiores dolorem esse possimus
+                    omnis
+                    maxime, corporis veritatis quos corrupti animi nihil, ex quibusdam suscipit nisi quasi soluta. Rerum
+                    ducimus
+                    repellendus quidem reiciendis dolore amet, eligendi doloribus perferendis, praesentium quaerat vitae
+                    rem,
+                    dignissimos ullam aliquam saepe sequi?
+                </p>
+                <h2>Title</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae officiis illum ex eos voluptatum
+                    facilis
+                    sed
+                    natus! Rem sunt quia officiis voluptate esse inventore nam dolore blanditiis. Quisquam id animi
+                    fugiat,
+                    deserunt laboriosam alias aperiam architecto aliquid vel esse? Quae amet, explicabo quos expedita
+                    laborum
+                    fuga molestiae. Nostrum maxime dolore autem, corrupti beatae vel cum omnis voluptates qui. Quos
+                    sequi
+                    tenetur at quaerat modi dolore, consequuntur deserunt est voluptates quasi facilis accusantium
+                    repellat
+                    similique ipsum ratione incidunt beatae. Ratione odio nostrum facere, maiores dolorem esse possimus
+                    omnis
+                    maxime, corporis veritatis quos corrupti animi nihil, ex quibusdam suscipit nisi quasi soluta. Rerum
+                    ducimus
+                    repellendus quidem reiciendis dolore amet, eligendi doloribus perferendis, praesentium quaerat vitae
+                    rem,
+                    dignissimos ullam aliquam saepe sequi?
+                </p>
+
+            </section>
+            <div class="card card_trtop">
+                <div class="card__photo-cont card__photo-cont_big">
+                    <img src="./woman.jpg" alt="" class="card__photo">
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        const card = document.querySelector('.card');
+        const photo = document.querySelector('.card__photo-cont');
+        const header = document.getElementById('header');
+        const message = document.querySelector("#message");
+        // const p = document.getElementById('p');
+
+
+        // document.onscroll = () => {
+        //     if (window.scrollY > 170) {
+        //         card.classList.remove('card_trtop');
+        //         photo.classList.remove('card__photo-cont_big');
+        //     } else {
+        //         card.classList.add('card_trtop');
+        //         photo.classList.add('card__photo-cont_big');
+        //     }
+        // }
+
+
+        // const observer = new IntersectionObserver((entries) => {
+        //     entries.forEach((entry) => {
+        // }
+        //     );
+        // });
+
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0]['isIntersecting'] === true) {
+                if (entries[0]['intersectionRatio'] > 0.85) {
+                    message.textContent = 'More than 85% of target is visible in screen';
+
+                    card.classList.add('card_trtop');
+                    photo.classList.add('card__photo-cont_big');
+                }
+                else {
+                    message.textContent = 'Less than 85% of target is visible in screen';
+                    card.classList.remove('card_trtop');
+                    photo.classList.remove('card__photo-cont_big');
+                }
+            }
+            else {
+                message.textContent = 'Target is not visible in screen';
+                // in case user scrolls way to fast
+                card.classList.remove('card_trtop');
+                photo.classList.remove('card__photo-cont_big');
+            }
+        }, { threshold: [0, 0.85] });
+
+        observer.observe(header);
+
+    </script>
+</body>
+
+</html>
