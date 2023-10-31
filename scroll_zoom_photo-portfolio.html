@@ -273,10 +273,10 @@
         const card = document.querySelector('.card');
         const photo = document.querySelector('.card__photo-cont');
         const header = document.getElementById('header');
-        const message = document.querySelector("#message");
+        // const message = document.querySelector("#message");
         // const p = document.getElementById('p');
 
-
+        // without IntersectionObserver - just document.onscroll  
         // document.onscroll = () => {
         //     if (window.scrollY > 170) {
         //         card.classList.remove('card_trtop');
@@ -287,33 +287,37 @@
         //     }
         // }
 
-
+        // without array method 
         // const observer = new IntersectionObserver((entries) => {
-        //     entries.forEach((entry) => {
-        // }
-        //     );
+        //     if (entries[0]['isIntersecting'] === true) { 
+        //      ... 
+        //      }
         // });
 
 
         const observer = new IntersectionObserver((entries) => {
-            if (entries[0]['isIntersecting'] === true) {
-                if (entries[0]['intersectionRatio'] > 0.85) {
-                    // message.textContent = 'More than 85% of target is visible in screen';
-                    card.classList.add('card_trtop');
-                    photo.classList.add('card__photo-cont_big');
+
+            entries.forEach((entry) => {
+                if (entry['isIntersecting'] === true) {
+                    if (entry['intersectionRatio'] > 0.85) {
+                        // message.textContent = 'More than 85% of target is visible in screen';
+                        card.classList.add('card_trtop');
+                        photo.classList.add('card__photo-cont_big');
+                    }
+                    else {
+                        // message.textContent = 'Less than 85% of target is visible in screen';
+                        card.classList.remove('card_trtop');
+                        photo.classList.remove('card__photo-cont_big');
+                    }
                 }
                 else {
-                    // message.textContent = 'Less than 85% of target is visible in screen';
+                    // message.textContent = 'Target is not visible in screen';
+                    // in case user scrolls way to fast
                     card.classList.remove('card_trtop');
                     photo.classList.remove('card__photo-cont_big');
                 }
-            }
-            else {
-                // message.textContent = 'Target is not visible in screen';
-                // in case user scrolls way to fast
-                card.classList.remove('card_trtop');
-                photo.classList.remove('card__photo-cont_big');
-            }
+            });
+
         }, { threshold: [0, 0.85] });
 
         observer.observe(header);
